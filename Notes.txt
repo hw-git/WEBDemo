@@ -1,0 +1,43 @@
+Servlet，filter，listener统称为JavaWeb的三大组件，它属于动态资源
+创建Servlet
+    1 实现Servlet接口，并实现其中的方法
+        init
+        service
+        destroy
+        getServletConfig
+        getServletInfo
+     2 在web.xml文件中进行servlet的注册和配置
+    <servlet><!--在servlet容器中注册serlvet-->
+        <servlet-name>firstServlet</servlet-name><!--servlet名称 一般和serlvet保持一直-->
+        <servlet-class>org.lanqiao.web.FirstServlet</servlet-class><!--servlet对应的类  需要全类名-->
+    </servlet>
+
+    <servlet-mapping> <!--创建servlet映射-->
+        <servlet-name>firstServlet</servlet-name><!--servlet名称 需要和上边你的名称保持一致-->
+        <url-pattern>/</url-pattern> <!-- 请求的url地址-->
+    </servlet-mapping>
+
+
+    3 执行情况：
+                init  只执行一次  实现对servlet的初始化
+                service 没请求一次 均会执行一次 处理请求的方法
+                destroy  当该servlet从servlet容器中卸载的时候 执行   执行一些扫尾工作
+                getServletConfig
+                getServletInfo
+    4请求过程:
+        当通过浏览器去访问localhost:8080   tomcat会首先解析web.xml
+
+     5 servlet的配置
+              <!--配置servlet的初始化参数-->
+                <init-param>
+                    <!--参数名称-->
+                    <param-name>hello</param-name>
+                    <!--参数值-->
+                    <param-value>world</param-value>
+                </init-param>
+                <!--该配置项 指定了servlet的初始化的时机  如果是负数   那么则在第一次请求的时候 才进行servlet的初始化   如果为正数，则是在servlet容器启动的时候就初始化了  正数越小   初始化的时机越早-->
+                <load-on-startup>1</load-on-startup>
+       6 servlet的生命周期
+          当调用servlet的init方法的时候 就是初始化了一个servlet对象    servlet 对象在整个生命周期中只有一个对象  所以servlet是单例模式
+          什么时候创建servlet的实例对象 与<load-on-startup>1</load-on-startup>
+          消亡：当serlvet从容器中卸载的时候 则宣告servlet生命结束

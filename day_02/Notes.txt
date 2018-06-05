@@ -1,0 +1,62 @@
+内容回顾：
+    HTTP 超文本传输协议
+    特点：无连接 无状态
+    HTTPS
+        1 什么是HTTPS？
+        2 HTTPS 常见的加密算法多有哪些？
+        3 如何在tomcat中开启tomcat的HTTPS协议支持？
+    JAVA  WEB  TOMCATweb容器/Servlet容器
+    JavaWEB三大组件：
+        Servlet  Filter  Listenner
+     Servlet  就是来处理用户的请求
+     Servlet的实现方式：
+            实现Servlet接口
+            继承GenericServlet
+            继承HttpServlet
+     实现Servlet接口 需要实现其中的方法：
+        init
+        service
+        destroy
+        getServletInfo
+        getServletConfig
+     Servlet的生命周期：
+                init  完成servlet的初始化
+                service 处理请求
+                destroy 处理一些扫尾工作
+     Servlet的配置：web.xml
+     <servlet>
+        <servlet-name/>
+        <servlet-class/>
+     </servlet>
+     <servlet-mapping>
+        <servlet-name/>
+        <url-pattern/>
+     </servlet-mapping>
+url-pattern的配置：
+         <url-pattern>/</url-pattern> /代标项目的根路径
+          <url-pattern>/abc/aaa/bbb/servletDemo</url-pattern>多层路径配置 可以很好的区分不同的请求
+          前边两种都不常用
+          通常情况下  我们采用通配符进行配置  *
+           <url-pattern>/*</url-pattern> 知道
+            <url-pattern>*.do</url-pattern>
+            <url-pattern>*.action</url-pattern>
+           注意：在一个url-pattern中只能出现一个通配符（*）
+           /*/*    *.*
+ServletRequest servletRequest  封装了请求信息  包括请求头和请求体
+ServletResponse servletResponse 封装了响应信息  包括响应头和响应体
+
+继承GenericServlet
+
+servlet3.0  使用注解开发servlet
+@webServlet
+    name
+    urlpartterns
+现在主流的开发模式  约定大于配置
+在开发中要么使用xml进行配置  要么使用注解
+如果在注解中只有url 则可以直接写 而不需要其他信息 包括url的名称
+继承HttpServlet
+    HttpServlet是对Http协议提供了特殊支持的servlet的实现
+    在http协议中，规定的请求方式有四种 （get  post  put  delete）在现阶段  所有的浏览器只支持两种方式：get  post
+
+    继承HttpServlet将是我们最常用的
+
