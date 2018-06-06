@@ -1,0 +1,21 @@
+ServletConfig 该对象表示servlet的配置
+            String   getInitParameter(String name)
+            Enumeration<String>   getInitParameterNames()
+            String     getServletName()
+            ServletContext  getServletContext()
+ServletContext   表示servlet的上下文   贯穿于整个web应用
+    随着web容器的启动而创建，随着web容器的关闭而销毁  伴随这个web应用  application域对象
+    ServletContext对象的作用是在整个Web应用的动态资源之间共享数据  实现在不同的servlet之间的数据共享
+    在一个web应用中，所有的servlet共享同一个ServletContext对象
+获取ServletContext对象
+    ServletConfig.getServletContext();
+    void setAttribute(String name, Object value)
+    Object getAttribute(String name)
+    void removeAttribute(String name)
+ ServletContext的应用：
+    统计当前web应用的方法次数。
+request的功能可以分为以下几种：
+        封装了请求头数据；
+        封装了请求正文数据，如果是GET请求，那么就没有正文；
+        request是一个域对象，可以把它当成Map来添加获取数据；
+        request提供了请求转发和请求包含功能。
