@@ -1,0 +1,33 @@
+ServletConfig   封装了与serlvet相关的配置信息  属于每个servlet独有的对象
+ServletContext  表示的servlet上下文  属于整个web应用所有  再整个应用中  所有的servlet 共享一个ServletContext对象  可以实现
+                再不同的servelt 之间的数据共享   统计当前应用访问的次数
+               Object  getAttribute(String name);
+               void   setAttribute(String name ,Object value);
+               removeAttribute(String name);
+ request    HttpServletRequest
+            每当客户端发出一个请求的时候  就会有一个request对象产生
+          封装了请求头  请求体
+          a超链接的请求方式是Get  不能修改
+          常用方法
+            int getContentLength()：获取请求体的字节数，GET请求没有请求体，没有请求体返回-1；
+            String getContentType()：获取请求类型，如果请求是GET，那么这个方法返回null；如果是POST请求，那么默认为application/x-www-form-urlencoded，表示请求体内容使用了URL编码；
+            String getMethod()：返回请求方法，例如：GET
+            Locale getLocale()：返回当前客户端浏览器的Locale。java.util.Locale表示国家和言语，这个东西在国际化中很有用；
+            String getCharacterEncoding()：获取请求编码，如果没有setCharacterEncoding()，那么返回null，表示使用ISO-8859-1编码；
+            void setCharacterEncoding(String code)：设置请求编码，只对请求体有效！注意，对于GET而言，没有请求体！！！所以此方法只能对POST请求中的参数有效！
+            String getContextPath()：返回上下文路径，例如：/hello
+            String getQueryString()：返回请求URL中的参数，例如：name=zhangSan
+            String getRequestURI()：返回请求URI路径，例如：/hello/oneServlet
+            StringBuffer getRequestURL()：返回请求URL路径，例如：http://localhost/hello/oneServlet，即返回除了参数以外的路径信息；
+            String getServletPath()：返回Servlet路径，例如：/oneServlet
+            String getRemoteAddr()：返回当前客户端的IP地址；
+            String getRemoteHost()：返回当前客户端的主机名，但这个方法的实现还是获取IP地址；
+            String getScheme()：返回请求协议，例如：http；
+            String getServerName()：返回主机名，例如：localhost
+            int getServerPort()：返回服务器端口号，例如：8080
+  对于中文乱码的解决方案：
+    中文乱码产生的原因：就是因为对于中文字符的编码和解码所采用的字符集不一致导致出现了中文乱码。
+    为了避免中文乱码 通常都采用UTF-8进行编码；
+   POST:  request.setCharacterEncoding("UTF-8"); 解决post请求的中文 乱码    这句代码必须出现在所有的参数接受之前进行设置 一边将该句代码放在servlet的第一行
+   GET: 在tomcat的server.xml中添加如下配置：
+             <Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443" URIEncoding="UTF-8"/>
